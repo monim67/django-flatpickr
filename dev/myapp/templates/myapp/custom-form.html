@@ -1,0 +1,26 @@
+{% extends 'layouts/main.html' %}
+
+{% block page_title %}
+django-flatpickr demo - custom form
+{% endblock %}
+
+{% block extra_css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block extra_js %}
+{{ form.media.js }}
+{% endblock %}
+
+
+{% block content %}
+<h1 class="title">Demo with Custom Form</h1>
+    <div class="column is-half">
+        <form action="" method="post">
+            {# {% csrf_token %} #}
+            {# csrf disabled for demo & version control purpose #}
+            {{ form.as_p }}
+        </form>
+    </div>
+</div>
+{% endblock %}

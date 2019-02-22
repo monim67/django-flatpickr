@@ -1,0 +1,33 @@
+{% extends 'layouts/main.html' %}
+
+{% block page_title %}
+django-flatpickr demo - {{ title_text }}
+{% endblock %}
+
+{% block extra_css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block extra_js %}
+{{ form.media.js }}
+{% endblock %}
+
+
+{% block content %}
+<h1 class="title">{{ title_text }}</h1>
+<div class="column is-half">
+  <form action="" method="post">
+    {# {% csrf_token %} #}
+    {# csrf disabled for demo & version control purpose #}
+    {{ form.as_p }}
+
+    <div class="field"></div>
+    <div class="field is-grouped">
+      <div class="control">
+        <button class="button is-link">{{ submit_text }}</button>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+{% endblock %}
