@@ -6,7 +6,7 @@ class WidgetMedia:
         yield settings.NPM_URL + 'flatpickr@4.5.2/dist/flatpickr.min.js'
         yield (
             settings.GITHUB_URL +
-            'django-flatpickr@1.0.0/static/js/django-flatpickr.js'
+            'monim67/django-flatpickr@1.0.0/static/js/django-flatpickr.js'
         )
         if 'locale' in settings.OPTIONS:
             yield (
