@@ -34,7 +34,7 @@ setup(
         'Topic :: Utilities',
         'Environment :: Web Environment',
         'Operating System :: OS Independent',
-        'License :: OSI Approved :: MIT Software License',
+        'License :: OSI Approved :: MIT License',
         'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
