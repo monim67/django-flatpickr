@@ -9,6 +9,10 @@ configured easily for date-range selection. For Bootstrap date-picker see
 `django-bootstrap-datepicker-plus <https://github.com/monim67/django-bootstrap-datepicker-plus>`_.
 
 
+|  |ci-status| |coverage.io|
+|  |pyversions| |djversions| |pypi-version|
+|  |format| |status| |license|
+
 |  |flatpickr-red-theme| |flatpickr-default-theme| |flatpickr-dark-theme|
 
 
@@ -190,6 +194,39 @@ License
 
 .. |flatpickr-dark-theme| image:: https://cloud.githubusercontent.com/assets/11352152/14549372/3cbc8514-028d-11e6-8daf-ec1ba01c9d7e.PNG
     :alt: Flatpickr Dark Theme
+
+
+.. |ci-status| image:: https://travis-ci.org/monim67/django-flatpickr.svg?branch=master
+    :target: https://travis-ci.org/monim67/django-flatpickr
+    :alt: Build Status
+
+.. |coverage.io| image:: https://coveralls.io/repos/github/monim67/django-flatpickr/badge.svg?branch=master
+    :target: https://coveralls.io/github/monim67/django-flatpickr?branch=master
+    :alt: Coverage Status
+
+.. |pyversions| image:: https://img.shields.io/pypi/pyversions/django-flatpickr.svg
+    :target: https://pypi.python.org/pypi/django-flatpickr
+    :alt: Python Versions
+
+.. |djversions| image:: https://img.shields.io/pypi/djversions/django-flatpickr.svg
+    :target: https://pypi.python.org/pypi/django-flatpickr
+    :alt: DJango Versions
+
+.. |pypi-version| image:: https://badge.fury.io/py/django-flatpickr.svg
+    :target: https://pypi.python.org/pypi/django-flatpickr
+    :alt: PyPI version
+
+.. |format| image:: https://img.shields.io/pypi/format/django-flatpickr.svg
+    :target: https://pypi.python.org/pypi/django-flatpickr
+    :alt: Format
+
+.. |status| image:: https://img.shields.io/pypi/status/django-flatpickr.svg
+    :target: https://pypi.python.org/pypi/django-flatpickr
+    :alt: Status
+
+.. |license| image:: https://img.shields.io/pypi/l/django-flatpickr.svg
+    :target: https://pypi.python.org/pypi/django-flatpickr
+    :alt: Licence
 
 
 .. _demo_custom_form: https://monim67.github.io/django-flatpickr/demo/custom-form.html

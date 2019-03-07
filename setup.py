@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='django-flatpickr',
-    version='1.0.0',
+    version='1.0.1',
     description='Flatpickr based DatePickerInput, TimePickerInput and '
                 'DateTimePickerInput with date-range-picker functionality '
                 'for django >= 2.0',
