@@ -25,6 +25,10 @@ def test_build(live_server: LiveServer) -> None:
             "../bulma.io/957351442",
             "https://bulma.io/",
         ),
+        (
+            "/static/django_flatpickr/",
+            "/django-flatpickr/demo/static/django_flatpickr/",
+        ),
     ]
     for file in pages.glob("demo/*.html"):
         file_text = file.read_text()
