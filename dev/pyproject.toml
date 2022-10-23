@@ -1,0 +1,2 @@
+[tool.pydocstyle]
+match = "nothing"

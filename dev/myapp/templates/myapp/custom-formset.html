@@ -1,0 +1,39 @@
+{% extends 'layouts/main.html' %}
+
+{% block page_title %}
+django-flatpickr demo - custom form
+{% endblock %}
+
+{% block extra_css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block extra_js %}
+{{ form.media.js }}
+{% endblock %}
+
+
+{% block content %}
+<div class="column">
+  <h1 class="title">{{ title_text }}</h1>
+  <h2 class="is-size-4">
+    Manage formset with
+    <a href="https://github.com/elo80ka/django-dynamic-formset">elo80ka/django-dynamic-formset</a>
+  </h2>
+</div>
+<div class="column is-half">
+  <form action="" method="post">
+    {# {% csrf_token %} #}
+    {# csrf disabled for demo & version control purpose #}
+    {{ form.management_form }}
+    {% for form in form %}
+    <div class="formset">{{ form }}</div>
+    {% endfor %}
+  </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/elo80ka/django-dynamic-formset@v1.2.2/src/jquery.formset.js"></script>
+<script>
+  $(".formset").formset();
+</script>
+{% endblock %}

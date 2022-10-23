@@ -1,7 +1,7 @@
 {% extends 'layouts/main.html' %}
 
 {% block page_title %}
-django-flatpickr demo - {{ title_text }}
+django-flatpickr demo - custom form
 {% endblock %}
 
 {% block extra_css %}
@@ -17,18 +17,19 @@ django-flatpickr demo - {{ title_text }}
 <div class="column">
   <h1 class="title">{{ title_text }}</h1>
 </div>
+{% load crispy_forms_tags %}
 <div class="column is-half">
+  <h2 class="is-size-4">Using {{ '{% crispy form %}' }}</h2>
   <form action="" method="post">
     {# {% csrf_token %} #}
     {# csrf disabled for demo & version control purpose #}
-    {{ form.as_p }}
-
-    <div class="field"></div>
-    <div class="field is-grouped">
-      <div class="control">
-        <button class="button is-link">{{ submit_text }}</button>
-      </div>
-    </div>
+    {% crispy form %}
+  </form>
+  <h2 class="is-size-4 mt-5">Using {% verbatim doc %}{{ form | crispy }}{% endverbatim doc %}</h2>
+  <form action="" method="post">
+    {# {% csrf_token %} #}
+    {# csrf disabled for demo & version control purpose #}
+    {{ form | crispy }}
   </form>
 </div>
 {% endblock %}

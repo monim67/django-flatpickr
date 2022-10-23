@@ -1,6 +1,5 @@
-.venv
-.vscode
-node_modules
+.env
+/pages
 db.sqlite3
 docs/_build
 docs/pydoc.io/autoapi
@@ -11,14 +10,22 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
 # Unit test / coverage reports
 htmlcov/
 .tox/
 .coverage
 .coverage.*
+coverage/*
 .cache
 nosetests.xml
-coverage.xml
 *.cover
 .hypothesis/
 

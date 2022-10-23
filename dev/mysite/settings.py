@@ -12,78 +12,84 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import sys
+from pathlib import Path
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import django_stubs_ext
 
-sys.path.insert(0, os.path.join(
-    os.path.dirname(__file__), '..', '..'))
+django_stubs_ext.monkeypatch()
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+sys.path.insert(0, str(BASE_DIR))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2%8tq3fn^3r$c0i18#jpkkg-@sf)hvc5cxwn04)**3=^(szm18'
+SECRET_KEY = "2%8tq3fn^3r$c0i18#jpkkg-@sf)hvc5cxwn04)**3=^(szm18"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ["localhost"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     # 'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
     # 'django.contrib.sessions',
     # 'django.contrib.messages',
-    # 'django.contrib.staticfiles',
-    'myapp.apps.MyappConfig',
-    'flatpickr',
-    'meta_redirect',
+    "django.contrib.staticfiles",
+    "dev.myapp.apps.MyappConfig",
+    "django_flatpickr",
+    "crispy_forms",
+    "crispy_bulma",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
     # 'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'mysite.urls'
+ROOT_URLCONF = "dev.mysite.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'mysite.context_processors.site_context',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "dev.mysite.context_processors.site_context",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'mysite.wsgi.application'
+WSGI_APPLICATION = "mysite.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
@@ -93,20 +99,17 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.'
-                'UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation."
+        "UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.'
-                'MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation." "MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.'
-                'CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation." "CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.'
-                'NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation." "NumericPasswordValidator",
     },
 ]
 
@@ -114,9 +117,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -128,54 +131,55 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+SITE_ID = 1
 
+CRISPY_TEMPLATE_PACK = "bulma"
+CRISPY_ALLOWED_TEMPLATE_PACKS = ["bulma"]
 
-# GLobal settings for all flatpickr inputs
-FLATPICKR_SETTINGS = {
-
+# GLobal settings for all django_flatpickr inputs
+DJANGO_FLATPICKR = {
     # Name of the theme to use
-    # More themes: https://cdn.jsdelivr.net/npm/flatpickr@4.5.2/dist/themes/
-    'theme_name': 'airbnb',
-
-    # # Complete URL of theme CSS file
-    # # theme_name is ignored if theme_url is provided
-    # 'theme_url': 'https://..',
-
-    # # Global HTML attributes for flatpickr <input> element
-    # 'attrs': {
-    #     'class': 'my-custom-class',
-    #     'placeholder': 'Select Date..',
+    # More themes: https://flatpickr.js.org/themes/
+    "theme_name": "dark",
+    #
+    # Complete URL of theme CSS file
+    # theme_name is ignored if theme_url is provided
+    # "theme_url": "https://..",
+    #
+    # Global HTML attributes for flatpickr <input> element
+    # "attrs": {
+    #     "class": "my-custom-class",
+    #     "placeholder": "Select Date..",
     # },
-
-    # # Global options for flatpickr
-    # # More options: https://flatpickr.js.org/options/
-    # # Some options are managed by this package e.g mode, dateFormat, altInput
-    # 'options': {
-    #     'locale': 'bn',             # locale option can be set here only
-    #     'dateFormat': 'm/d/Y H:i',  # reflects in altFormat
+    #
+    # Global options for flatpickr
+    # More options: https://flatpickr.js.org/options/
+    # Some options are managed by this package e.g mode, dateFormat, altInput
+    # "options": {
+    #     "locale": "bn",             # locale option can be set here only
+    #     "altFormat": "m/d/Y H:i",   # specify date format on the front-end
     # }
-
-    # # HTML template to render the flatpickr input
-    # # Instructions: https://github.com/monim67/django-flatpickr/blob/v1.0.0/dev/myapp/templates/myapp/custom-flatpickr-input.html
-    # 'template_name': 'myapp/custom-flatpickr-input.html',
-
-    # # Advanced option!!! Use it only if you need to.
-    # # Specify CDN roots. Choose where from static JS/CSS are served.
-    # # Can be set to localhost (offline setup) or any other preferred CDN.
-    # # Examples:
-    # #    https://unpkg.com/  # npm_url only
-    # #    http://localhost/cdn/
-    # #    /static/ or <Empty String>
-    # # Defaults:
-    # #    npm_url    : https://cdn.jsdelivr.net/npm/
-    # #    github_url : https://cdn.jsdelivr.net/gh/
-
-    # 'npm_url': 'https://unpkg.com/',
-    # 'github_url': 'http://localhost',
+    # You can set date and event hook options using JavaScript, usage in README.
+    #
+    # HTML template to render the flatpickr input
+    # Example: https://github.com/monim67/django-flatpickr/blob/v2.0.0/dev/myapp/templates/myapp/custom-flatpickr-input.html
+    # "template_name": "your-app/custom-flatpickr-input.html",
+    #
+    # Specify CDN roots. Choose where from static JS/CSS are served.
+    # Can be set to localhost (offline setup) or any other preferred CDN.
+    # The default values are:
+    #    "flatpickr_cdn_url": "https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/",
+    #    "app_static_url": "https://cdn.jsdelivr.net/gh/monim67/django-flatpickr@2.0.0/src/django_flatpickr/static/django_flatpickr/",
+    #
+    # Advanced:
+    # If you want to serve static files yourself without CDN (from staticfiles) and
+    # you know how to serve django static files on production server (DEBUG=False)
+    # Then download and extract https://registry.npmjs.org/flatpickr/-/flatpickr-4.6.13.tgz
+    # Copy the dist directory (package/dist) to any of your static directory and rename it to flatpickr
+    # and use following options
+    #    "flatpickr_cdn_url": "flatpickr/",
+    #    "app_static_url": "django_flatpickr/",
 }
-
-
-# !!! FOR PACKAGE DEVELOPEMENT AND TESTING ONLY!!!
-if sys.argv[1].lower() != 'test':
-    FLATPICKR_SETTINGS['github_url'] = '/dev/'

@@ -1,0 +1,49 @@
+{% extends 'layouts/main.html' %}
+
+{% block page_title %}
+django-flatpickr demo - {{ title_text }}
+{% endblock %}
+
+{% block extra_css %}
+{{ filter.form.media.css }}
+{% endblock %}
+
+{% block extra_js %}
+{{ filter.form.media.js }}
+{% endblock %}
+
+
+{% block content %}
+<div class="column">
+  <h1 class="title">{{ title_text }}</h1>
+</div>
+<div class="column">
+  <div class="column is-half">
+    <h1 class="is-size-4">Filter Events</h1>
+    <h1 class="is-size-6 has-text-info">Demo site is static HTML clone of django, filters won't work here</h1>
+    <form>
+      {# {% csrf_token %} #}
+      {# csrf disabled for demo & version control purpose #}
+      {{ filter.form.as_p }}
+
+      <div class="field"></div>
+      <div class="field is-grouped">
+        <div class="control">
+          <a class="button is-warning" href="?">Clear Filters</a>
+          <button class="button is-link">{{ submit_text }}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="column is-half">
+    <h1 class="is-size-4">Events</h1>
+    <ul>
+      {% for event in object_list %}
+      <li>{{ event.name }} ({{ event.start_date|date }} - {{ event.end_date|date }})</li>
+      {% empty %}
+      <li>No events found.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

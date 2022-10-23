@@ -11,8 +11,8 @@ class Event(models.Model):
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('myapp:model-form', kwargs={'pk': self.pk})
+    def get_absolute_url(self) -> str:
+        return reverse("myapp:model-form", kwargs={"pk": self.pk})

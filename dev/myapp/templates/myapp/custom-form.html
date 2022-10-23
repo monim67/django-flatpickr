@@ -10,17 +10,26 @@ django-flatpickr demo - custom form
 
 {% block extra_js %}
 {{ form.media.js }}
+<script>
+  window.djangoFlatpickrOptions = {
+    onChange: function (selectedDates) { console.log("Global onChange") }
+  }
+  window.djangoFlatpickrOptions_start_date = {
+    onChange: function (selectedDates) { console.log("start_date onChange") }
+  }
+</script>
 {% endblock %}
 
 
 {% block content %}
-<h1 class="title">Demo with Custom Form</h1>
-    <div class="column is-half">
-        <form action="" method="post">
-            {# {% csrf_token %} #}
-            {# csrf disabled for demo & version control purpose #}
-            {{ form.as_p }}
-        </form>
-    </div>
+<div class="column">
+  <h1 class="title">{{ title_text }}</h1>
+</div>
+<div class="column is-half">
+  <form action="" method="post">
+    {# {% csrf_token %} #}
+    {# csrf disabled for demo & version control purpose #}
+    {{ form.as_p }}
+  </form>
 </div>
 {% endblock %}
