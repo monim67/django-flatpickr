@@ -165,7 +165,7 @@ DJANGO_FLATPICKR = {
     # You can set date and event hook options using JavaScript, usage in README.
     #
     # HTML template to render the flatpickr input
-    # Example: https://github.com/monim67/django-flatpickr/blob/v2.0.0/dev/myapp/templates/myapp/custom-flatpickr-input.html
+    # Example: https://github.com/monim67/django-flatpickr/blob/2.0.0/dev/myapp/templates/myapp/custom-flatpickr-input.html
     # "template_name": "your-app/custom-flatpickr-input.html",
     #
     # Specify CDN roots. Choose where from static JS/CSS are served.
