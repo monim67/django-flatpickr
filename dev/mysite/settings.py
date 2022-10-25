@@ -150,10 +150,9 @@ DJANGO_FLATPICKR = {
     # "theme_url": "https://..",
     #
     # Global HTML attributes for flatpickr <input> element
-    # "attrs": {
-    #     "class": "my-custom-class",
-    #     "placeholder": "Select Date..",
-    # },
+    "attrs": {
+        "class": "input",  # input class of bulma
+    },
     #
     # Global options for flatpickr
     # More options: https://flatpickr.js.org/options/
