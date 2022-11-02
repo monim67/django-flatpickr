@@ -33,7 +33,7 @@ class FlatpickrOptions(BaseModel, extra=Extra.allow):
     clickOpens: Optional[bool]
     dateFormat: Optional[str]
     defaultDate: Optional[str]
-    defaultHour: Optional[int] = Field(ge=1, le=12)
+    defaultHour: Optional[int] = Field(ge=0, le=23)
     defaultMinute: Optional[int] = Field(ge=0, le=59)
     disable: Optional[List[str]]
     disableMobile: Optional[bool]
