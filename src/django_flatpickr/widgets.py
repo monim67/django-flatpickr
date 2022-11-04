@@ -13,8 +13,9 @@ class DatePickerInput(BasePickerInput):
     """Widget for DateField to display a Date-Picker Calendar.
 
     Args:
-        - attrs (dict): HTML attributes of rendered HTML input
-        - options (dict): Options to customize the widget, see Docs
+        attrs: HTML attributes of rendered HTML input
+        options: Options to customize the widget, see Docs
+        range_from: Name of input to link for range selection
     """
 
     picker_type = "DATE"
@@ -26,8 +27,9 @@ class TimePickerInput(BasePickerInput):
     """Widget for TimeField to display a Time-Picker Calendar.
 
     Args:
-        - attrs (dict): HTML attributes of rendered HTML input
-        - options (dict): Options to customize the widget, see Docs
+        attrs: HTML attributes of rendered HTML input
+        options: Options to customize the widget, see Docs
+        range_from: Name of input to link for range selection
     """
 
     picker_type = "TIME"
@@ -44,8 +46,9 @@ class DateTimePickerInput(BasePickerInput):
     """Widget for DateTimeField to display a DateTime-Picker Calendar.
 
     Args:
-        - attrs (dict): HTML attributes of rendered HTML input
-        - options (dict): Options to customize the widget, see Docs
+        attrs: HTML attributes of rendered HTML input
+        options: Options to customize the widget, see Docs
+        range_from: Name of input to link for range selection
     """
 
     picker_type = "DATETIME"
