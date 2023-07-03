@@ -218,8 +218,8 @@ License
     :alt: Flatpickr Dark Theme
 
 
-.. |ci-status| image:: https://travis-ci.org/monim67/django-flatpickr.svg?branch=master
-    :target: https://travis-ci.org/monim67/django-flatpickr
+.. |ci-status| image:: https://github.com/monim67/django-flatpickr/actions/workflows/build.yml/badge.svg?event=push
+    :target: https://github.com/monim67/django-flatpickr/actions/workflows/build.yml
     :alt: Build Status
 
 .. |coverage| image:: https://coveralls.io/repos/github/monim67/django-flatpickr/badge.svg?branch=master
