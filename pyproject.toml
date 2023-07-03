@@ -10,7 +10,7 @@ authors = ["Munim Munna <6266677+monim67@users.noreply.github.com>"]
 repository = "https://github.com/monim67/django-flatpickr"
 license = "MIT"
 readme = "README.rst"
-packages = [{ include = "*", from = "src" }]
+packages = [{ include = "django_flatpickr", from = "src" }]
 keywords = [
     "django",
     "flatpickr",
@@ -115,7 +115,7 @@ source = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{310,39,38,37}
+envlist = py{3.11,310,39,38,37}
 
 [testenv]
 allowlist_externals = poetry
