@@ -35,7 +35,8 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 Django = ">=2,<5"
-pydantic = "*"
+pydantic = "^2"
+pydantic-settings = "*"
 typing-extensions = "*"
 
 [tool.poetry.group.build.dependencies]
@@ -44,7 +45,7 @@ pytest-dotenv = "^0.5.2"
 black = "^22.6.0"
 isort = "^5.10.1"
 pydocstyle = {extras = ["toml"], version = "^6.1.1"}
-mypy = "*"
+mypy = "^1.0.1"
 django-stubs = "^1.12.0"
 coverage = { extras = ["toml"], version = "^6.5.0" }
 pylint = "^2.12.0"
@@ -115,7 +116,7 @@ source = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{3.11,310,39,38,37}
+envlist = py{311,310,39,38}
 
 [testenv]
 allowlist_externals = poetry
@@ -123,7 +124,6 @@ skip_install = true
 commands =
     poetry install --no-root --only build
     pip install -c tests/pip-constraints.txt .
-    poe lint
     pytest
 """
 

@@ -9,6 +9,7 @@ __pycache__/
 .pytest_cache/
 *.py[cod]
 *$py.class
+.DS_Store
 
 # IDE - VSCode
 .vscode/*
@@ -47,4 +48,3 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-

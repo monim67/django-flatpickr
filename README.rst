@@ -32,7 +32,7 @@ Getting Started
 
 Prerequisites
 ^^^^^^^^^^^^^
--  Python >= 3.7
+-  Python >= 3.8
 -  Django >= 2.0
 
 
@@ -66,6 +66,11 @@ A better example is `here <file_custom_form_html_>`_.
     <!-- File: myapp/custom-form.html -->
     {{ form.media }}  {# Adds all flatpickr JS/CSS files from CDN #}
     {{ form.as_p }}   {# Renders the form #}
+
+    <form method="post">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+    </form>
 
 
 You can use it `with generic views without a model form <generic_view_block_>`_.

@@ -3,8 +3,16 @@ import functools
 from typing import Any, Dict, Optional, Tuple
 
 from django.conf import settings as django_settings
-from pydantic import Field
-from pydantic.env_settings import BaseSettings, SettingsSourceCallable
+
+try:
+    from pydantic.v1 import Field
+    from pydantic.v1.env_settings import BaseSettings, SettingsSourceCallable
+except ModuleNotFoundError:  # pragma: no cover
+    from pydantic import Field  # type: ignore
+    from pydantic.env_settings import (  # type: ignore
+        BaseSettings,
+        SettingsSourceCallable,
+    )
 
 from .schemas import FlatpickrOptions, ThemeEnum
 
