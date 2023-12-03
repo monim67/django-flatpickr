@@ -33,7 +33,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 Django = ">=2,<5"
 pydantic = "*"
 typing-extensions = "*"
@@ -72,7 +72,7 @@ disable = ["R", "C", "missing-docstring", "unused-argument"]
 max-line-length = 88
 
 [tool.isort]
-py_version = "37"
+py_version = "38"
 profile = "black"
 
 [tool.pydocstyle]
@@ -80,7 +80,7 @@ convention = "google"
 add_select = "D401,D404"
 
 [tool.mypy]
-python_version = "3.7"
+python_version = "3.8"
 namespace_packages = true
 strict = true
 plugins = ["mypy_django_plugin.main"]
