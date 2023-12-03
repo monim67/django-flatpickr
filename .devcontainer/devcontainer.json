@@ -1,0 +1,15 @@
+{
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.isort",
+				"ms-python.black-formatter",
+				"ms-python.mypy-type-checker"
+			]
+		}
+	}
+}
