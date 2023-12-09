@@ -30,6 +30,9 @@ def test_build(live_server: LiveServer) -> None:
             "/django-flatpickr/demo/static/django_flatpickr/",
         ),
     ]
+    mjs_file = pages / "demo/static/django_flatpickr/js/django-flatpickr.mjs"
+    if mjs_file.exists():
+        mjs_file.rename(mjs_file.with_suffix(".js"))
     for file in pages.glob("demo/*.html"):
         file_text = file.read_text()
         for search_text, replace_text in url_replacements:
