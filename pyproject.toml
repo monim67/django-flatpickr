@@ -30,11 +30,12 @@ classifiers = [
     "Framework :: Django :: 2.0",
     "Framework :: Django :: 3.0",
     "Framework :: Django :: 4.0",
+    "Framework :: Django :: 5.0",
 ]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-Django = ">=2,<5"
+Django = ">=2,<6"
 pydantic = "^2"
 pydantic-settings = "*"
 typing-extensions = "*"
