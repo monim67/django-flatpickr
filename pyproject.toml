@@ -36,7 +36,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 Django = ">=2,<6"
-pydantic = "^2"
+pydantic = "*"
 pydantic-settings = "*"
 typing-extensions = "*"
 
