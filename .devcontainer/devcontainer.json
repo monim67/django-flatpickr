@@ -2,6 +2,8 @@
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
+	"onCreateCommand": "make -C .devcontainer oncreate",
+	"postStartCommand": "poetry install --sync",
 	"customizations": {
 		"vscode": {
 			"extensions": [
