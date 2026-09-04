@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.18.0/.schema/devbox.schema.json",
+  "packages": {
+    "poetry": {
+      "version": "2.4.1",
+      "disable_plugin": true
+    },
+    "uv": "0.12.5"
+  },
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null"
+    ],
+    "scripts": {
+      "setup": [
+        "uv venv --python 3.14 --prompt .venv --allow-existing",
+        "poetry sync"
+      ],
+      "test": [
+        "echo \"Error: no test specified\""
+      ]
+    }
+  }
+}

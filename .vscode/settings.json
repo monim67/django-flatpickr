@@ -3,8 +3,9 @@
   "python.testing.unittestEnabled": false,
   "[python]": {
     "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true,
+      "source.organizeImports": "explicit"
     }
   },
   "[javascript]": {

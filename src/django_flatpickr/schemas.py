@@ -1,16 +1,14 @@
 """Datastructures of the package."""
 
 from enum import Enum
-from typing import Any, Dict, List, NoReturn, Optional
+from typing import Any, NoReturn, TypeAlias
 
 try:
     from pydantic.v1 import BaseModel, Extra, Field, validator
 except ModuleNotFoundError:  # pragma: no cover
     from pydantic import BaseModel, Extra, Field, validator  # type: ignore
 
-from typing_extensions import TypeAlias
-
-InputAttrs: TypeAlias = Dict[str, Any]
+InputAttrs: TypeAlias = dict[str, Any]
 
 
 class ThemeEnum(str, Enum):
@@ -25,42 +23,42 @@ class ThemeEnum(str, Enum):
     confetti = "confetti"
 
 
-class FlatpickrOptions(BaseModel, extra=Extra.allow):
+class FlatpickrOptions(BaseModel, extra=Extra.allow):  # pyright: ignore
     """Flatpickr options to create flatpickr instance."""
 
-    allowInput: Optional[bool]
-    allowInvalidPreload: Optional[bool]
-    altFormat: Optional[str]
+    allowInput: bool | None
+    allowInvalidPreload: bool | None
+    altFormat: str | None
     altInput: bool = True
-    altInputClass: Optional[str]
-    ariaDateFormat: Optional[str]
-    clickOpens: Optional[bool]
-    dateFormat: Optional[str]
-    defaultDate: Optional[str]
-    defaultHour: Optional[int] = Field(ge=0, le=23)
-    defaultMinute: Optional[int] = Field(ge=0, le=59)
-    disable: Optional[List[str]]
-    disableMobile: Optional[bool]
-    enable: Optional[List[str]]
-    enableSeconds: Optional[bool]
-    enableTime: Optional[bool]
-    hourIncrement: Optional[int] = Field(ge=1, le=12)
-    inline: Optional[bool]
-    locale: Optional[str]
-    maxDate: Optional[str]
-    minDate: Optional[str]
-    minuteIncrement: Optional[int] = Field(ge=0, le=59)
-    mode: Optional[str]
-    monthSelectorType: Optional[str]
-    nextArrow: Optional[str]
-    noCalendar: Optional[bool]
-    position: Optional[str]
-    prevArrow: Optional[str]
-    shorthandCurrentMonth: Optional[bool]
-    showMonths: Optional[int] = Field(ge=1, le=12)
-    static: Optional[bool]
-    time_24hr: Optional[bool]
-    weekNumbers: Optional[bool]
+    altInputClass: str | None
+    ariaDateFormat: str | None
+    clickOpens: bool | None
+    dateFormat: str | None
+    defaultDate: str | None
+    defaultHour: int | None = Field(ge=0, le=23)
+    defaultMinute: int | None = Field(ge=0, le=59)
+    disable: list[str] | None
+    disableMobile: bool | None
+    enable: list[str] | None
+    enableSeconds: bool | None
+    enableTime: bool | None
+    hourIncrement: int | None = Field(ge=1, le=12)
+    inline: bool | None
+    locale: str | None
+    maxDate: str | None
+    minDate: str | None
+    minuteIncrement: int | None = Field(ge=0, le=59)
+    mode: str | None
+    monthSelectorType: str | None
+    nextArrow: str | None
+    noCalendar: bool | None
+    position: str | None
+    prevArrow: str | None
+    shorthandCurrentMonth: bool | None
+    showMonths: int | None = Field(ge=1, le=12)
+    static: bool | None
+    time_24hr: bool | None
+    weekNumbers: bool | None
     wrap: bool = True
 
     @validator("mode")

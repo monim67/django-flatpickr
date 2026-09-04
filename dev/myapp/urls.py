@@ -1,16 +1,15 @@
-from django.http import HttpResponse
 from django.urls import path
 
 from dev.myapp import views
+
+from .utils import http_meta_redirect_view
 
 app_name = "myapp"
 
 urlpatterns = [
     path(
         "",
-        lambda _: HttpResponse(
-            '<META http-equiv="refresh" content="0;URL=generic-view-with-model-form-1.html">'
-        ),
+        http_meta_redirect_view("generic-view-with-model-form-1.html"),
     ),
     path("generic-view.html", views.CreateView.as_view(), name="generic-view"),
     path(

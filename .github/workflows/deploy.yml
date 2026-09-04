@@ -12,7 +12,11 @@ jobs:
     env:
       POETRY_VIRTUALENVS_CREATE: "false"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+
+      - name: Add pipx to PATH
+        if: github.actor == 'nektos/act'
+        run: echo "/root/.local/bin" >> ${GITHUB_PATH}
 
       - name: Install poetry
         run: |
@@ -25,4 +29,5 @@ jobs:
           poetry build
 
       - name: Publish package distributions to PyPI
+        if: github.actor != 'nektos/act'
         uses: pypa/gh-action-pypi-publish@release/v1

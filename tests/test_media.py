@@ -1,4 +1,4 @@
-from pytest_django.fixtures import SettingsWrapper
+from pytest_django import Settings
 
 from django_flatpickr._base import BasePickerInput
 from django_flatpickr.schemas import FlatpickrOptions
@@ -9,7 +9,7 @@ def test_media_render_with_default_options() -> None:
     fp_input.media.render()
 
 
-def test_presence_of_theme_url_in_rendered_media(settings: SettingsWrapper) -> None:
+def test_presence_of_theme_url_in_rendered_media(settings: Settings) -> None:
     theme_url = "http://localhost/xxxxxx"
     settings.DJANGO_FLATPICKR = {"theme_url": theme_url}
     fp_input = BasePickerInput()

@@ -1,5 +1,3 @@
-from typing import Type
-
 from django.forms import BaseForm, ModelForm, formset_factory
 from django.forms.models import modelform_factory
 from django.http import HttpResponse, HttpResponseRedirect
@@ -43,7 +41,7 @@ class CreateView(generic.edit.CreateView[Event, ModelForm[Event]]):
         "submit_text": "Create Event",
     }
 
-    def get_form_class(self) -> Type[ModelForm[Event]]:
+    def get_form_class(self) -> type[ModelForm[Event]]:
         return modelform_factory(
             self.model,
             fields=self.fields,

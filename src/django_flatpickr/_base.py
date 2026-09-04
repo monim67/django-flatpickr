@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 """Contains Base Date-Picker input class for widgets of this package."""
 
-from typing import Any, Dict, Optional
+from typing import Any
 
 from django import forms
 from django.forms.widgets import DateTimeBaseInput
@@ -19,15 +18,15 @@ class BasePickerInput(DateTimeBaseInput):
     datetime_format = "%Y-%m-%d"
     format_key = "DATE_INPUT_FORMATS"
     template_name = "django_flatpickr/input.html"
-    options: Optional[FlatpickrOptions] = None
-    _option_overrides: Optional[Dict[str, Any]] = None
+    options: FlatpickrOptions | None = None
+    _option_overrides: dict[str, Any] | None = None
 
     def __init__(
         self,
-        attrs: Optional[InputAttrs] = None,
+        attrs: InputAttrs | None = None,
         *,
-        options: Optional[FlatpickrOptions] = None,
-        range_from: Optional[str] = None,
+        options: FlatpickrOptions | None = None,
+        range_from: str | None = None,
     ):
         """Initialize the Date-picker widget."""
         if not isinstance(options, (FlatpickrOptions, type(None))):
@@ -46,7 +45,7 @@ class BasePickerInput(DateTimeBaseInput):
         super().__init__(attrs, self.datetime_format)
 
     def build_attrs(
-        self, base_attrs: InputAttrs, extra_attrs: Optional[InputAttrs] = None
+        self, base_attrs: InputAttrs, extra_attrs: InputAttrs | None = None
     ) -> InputAttrs:
         """Build an attribute dictionary."""
         settings = get_django_flatpickr_settings()

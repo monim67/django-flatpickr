@@ -1,4 +1,4 @@
-[tool.poetry]
+[project]
 name = "django-flatpickr"
 version = "0.0.0"
 description = """\
@@ -6,11 +6,10 @@ description = """\
     DateTimePickerInput with date-range-picker functionality \
     for django >= 2.0\
     """
-authors = ["Munim Munna <6266677+monim67@users.noreply.github.com>"]
-repository = "https://github.com/monim67/django-flatpickr"
-license = "MIT"
 readme = "README.rst"
-packages = [{ include = "django_flatpickr", from = "src" }]
+requires-python = ">=3.10,<4"
+license = "MIT"
+authors = [{ name = "Abdul Monim" }]
 keywords = [
     "django",
     "flatpickr",
@@ -26,44 +25,61 @@ classifiers = [
     "Environment :: Web Environment",
     "Operating System :: OS Independent",
     "Development Status :: 5 - Production/Stable",
+    "Typing :: Typed",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Framework :: Django",
     "Framework :: Django :: 2.0",
     "Framework :: Django :: 3.0",
     "Framework :: Django :: 4.0",
     "Framework :: Django :: 5.0",
 ]
+dependencies = [
+    "Django>=2,<6",
+    "pydantic>=1,<3",
+    "pydantic-settings",
+]
 
-[tool.poetry.dependencies]
-python = "^3.8"
-Django = ">=2,<6"
-pydantic = ">=1,<3"
-pydantic-settings = "*"
-typing-extensions = "*"
+[project.urls]
+repository = "https://github.com/monim67/django-flatpickr"
+
+[tool.poetry]
+packages = [{ include = "django_flatpickr", from = "src" }]
 
 [tool.poetry.group.build.dependencies]
 pytest-django = "^4.5.2"
 pytest-dotenv = "^0.5.2"
-black = "^22.6.0"
+pytest-xdist = "^3.8.0"
+black = "^26.5.1"
 isort = "^5.10.1"
 pydocstyle = {extras = ["toml"], version = "^6.1.1"}
-mypy = "^1.0.1"
-django-stubs = "^1.12.0"
+pyright = "^1.1.350"
+django-stubs = "~6.0.9"
 coverage = { extras = ["toml"], version = "^6.5.0" }
 pylint = "^2.12.0"
 rstcheck = "^6.1.0"
-pywebcopy = "^7.0.2"
+website-downloader = "^2.6.1"
 poethepoet = "^0.15.0"
 django-crispy-forms = "^1.14.0"
 crispy-bulma = "^0.8.0"
-django-filter = "^22.1"
+django-filter = "^26.1"
 
 [tool.poetry.group.dev.dependencies]
-tox = "^3.24.5"
+tox = "^4.61.1"
+tox-uv-bare = "^1.36.0"
 pre-commit = "^2.20.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.requires-plugins]
+poetry-bumpversion = ">=0.3.3"
 
 [tool.poetry_bumpversion.file."src/django_flatpickr/__init__.py"]
 
@@ -73,23 +89,19 @@ disable = ["R", "C", "missing-docstring", "unused-argument"]
 [tool.pylint.format]
 max-line-length = 88
 
+[tool.black]
+target-version = ["py310", "py311", "py312", "py313", "py314"]
+
 [tool.isort]
-py_version = "38"
+py_version = "310"
 profile = "black"
 
 [tool.pydocstyle]
 convention = "google"
 add_select = "D401,D404"
 
-[tool.mypy]
-python_version = "3.8"
-namespace_packages = true
-strict = true
-plugins = ["mypy_django_plugin.main"]
-
-[[tool.mypy.overrides]]
-module = ["pywebcopy.*", "django_filters.*", "importlib_metadata.*"]
-ignore_missing_imports = true
+[tool.pyright]
+include = ["src", "dev", "tests"]
 
 [tool.django-stubs]
 django_settings_module = "dev.mysite.settings"
@@ -98,7 +110,7 @@ django_settings_module = "dev.mysite.settings"
 pythonpath = "." # pytest-django needs it to find dev module
 django_find_project = false
 DJANGO_SETTINGS_MODULE = "dev.mysite.settings"
-addopts = "--reuse-db"
+addopts = "-n auto"
 testpaths = ["tests"]
 env_files = [".env", ".env.defaults"]
 
@@ -114,19 +126,14 @@ source = [
 ]
 
 [tool.tox]
-legacy_tox_ini = """
-[tox]
-isolated_build = True
-envlist = py{311,310,39,38}
+requires = ["tox>=4"]
+env_list = ["3.14", "3.13", "3.12", "3.11", "3.10"]
 
-[testenv]
-allowlist_externals = poetry
+[tool.tox.env_run_base]
 skip_install = true
-commands =
-    poetry install --no-root --only build
-    pip install -c tests/pip-constraints.txt .
-    pytest
-"""
+allowlist_externals = ["bash"]
+commands_pre = [["bash", "tests/install-tox-deps.bash"]]
+commands = [["pytest"]]
 
 [tool.poe]
 envfile = [".env.defaults", ".env"]
@@ -136,7 +143,7 @@ start = { cmd = "python dev/manage.py runserver localhost:8000", help = "Start d
 lint = [
     { cmd = "python -m black --check src tests dev" },
     { cmd = "python -m isort --check-only src tests dev" },
-    { cmd = "mypy src tests dev" },
+    { cmd = "pyright" },
     { cmd = "pydocstyle src" },
     { cmd = "rstcheck --report-level warning README.rst" },
 ]

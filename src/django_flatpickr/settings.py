@@ -1,6 +1,7 @@
 """Package settings."""
+
 import functools
-from typing import Any, Dict, Optional, Tuple
+from typing import Any
 
 from django.conf import settings as django_settings
 
@@ -17,17 +18,17 @@ except ModuleNotFoundError:  # pragma: no cover
 from .schemas import FlatpickrOptions, ThemeEnum
 
 
-def _django_settings_source(settings: BaseSettings) -> Dict[str, Any]:
+def _django_settings_source(settings: BaseSettings) -> dict[str, Any]:
     return getattr(django_settings, "DJANGO_FLATPICKR", {})
 
 
-class DjangoFlatpickrSettings(BaseSettings):
+class DjangoFlatpickrSettings(BaseSettings):  # pyright: ignore
     """Package settings to customize inputs."""
 
-    theme_name: Optional[ThemeEnum]
-    theme_url: Optional[str]
-    template_name: Optional[str]
-    attrs: Dict[str, str] = {}
+    theme_name: ThemeEnum | None
+    theme_url: str | None
+    template_name: str | None
+    attrs: dict[str, str] = {}
     options = FlatpickrOptions()
     flatpickr_cdn_url = "https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/"
     app_static_url = "https://cdn.jsdelivr.net/gh/monim67/django-flatpickr@2.0.0/src/django_flatpickr/static/django_flatpickr/"
@@ -44,7 +45,7 @@ class DjangoFlatpickrSettings(BaseSettings):
             init_settings: SettingsSourceCallable,
             env_settings: SettingsSourceCallable,
             file_secret_settings: SettingsSourceCallable,
-        ) -> Tuple[SettingsSourceCallable, ...]:
+        ) -> tuple[SettingsSourceCallable, ...]:
             """Add django settings as config source."""
             return (
                 init_settings,

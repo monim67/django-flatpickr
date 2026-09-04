@@ -1,8 +1,9 @@
 {
     "recommendations": [
-        "ms-python.mypy-type-checker",
         "ms-python.black-formatter",
         "ms-python.isort",
-        "ms-python.python"
+        "ms-python.python",
+        "jetpack-io.devbox",
+        "sanjulaganepola.github-local-actions"
     ]
 }

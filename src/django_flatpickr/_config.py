@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any
 
 try:
     from pydantic.v1 import BaseModel, Field
@@ -8,17 +8,17 @@ except ModuleNotFoundError:  # pragma: no cover
 from .schemas import FlatpickrOptions
 
 
-class WidgetConfig(BaseModel):
+class WidgetConfig(BaseModel):  # pyright: ignore
     """Widget config which is passed to input on render."""
 
     picker_type: str
     options: FlatpickrOptions = Field(default_factory=FlatpickrOptions)
-    range_from: Optional[str]
+    range_from: str | None
 
     def update_options(
         self,
-        *options_args: Optional[FlatpickrOptions],
-        overrides: Optional[Dict[str, Any]] = None,
+        *options_args: FlatpickrOptions | None,
+        overrides: dict[str, Any] | None = None,
     ) -> None:
         """Update options merging FlatpickrOptions sequentially."""
         for options_arg in options_args:

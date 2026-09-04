@@ -1,4 +1,4 @@
-from typing import Iterable
+from collections.abc import Iterable
 
 from django_flatpickr.schemas import FlatpickrOptions
 from django_flatpickr.settings import DjangoFlatpickrSettings
