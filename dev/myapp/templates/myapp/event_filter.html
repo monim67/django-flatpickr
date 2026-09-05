@@ -14,11 +14,10 @@ django-flatpickr demo - {{ title_text }}
 
 
 {% block content %}
-<div class="column">
-  <h1 class="title">{{ title_text }}</h1>
-</div>
-<div class="column">
+<div class="columns is-multiline mt-4">
   <div class="column is-half">
+    <h1 class="title">{{ title_text }}</h1>
+    {% if lead_text %}<p class="subtitle">{{ lead_text|safe }}</p>{% endif %}
     <h1 class="is-size-4">Filter Events</h1>
     <h1 class="is-size-6 has-text-info">Demo site is static HTML clone of django, filters won't work here</h1>
     <form>
@@ -34,8 +33,6 @@ django-flatpickr demo - {{ title_text }}
         </div>
       </div>
     </form>
-  </div>
-  <div class="column is-half">
     <h1 class="is-size-4">Events</h1>
     <ul>
       {% for event in object_list %}
@@ -44,6 +41,9 @@ django-flatpickr demo - {{ title_text }}
       <li>No events found.</li>
       {% endfor %}
     </ul>
+  </div>
+  <div class="column is-half">
+    {% include 'myapp/agent-prompt.html' %}
   </div>
 </div>
 {% endblock %}

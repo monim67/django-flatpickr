@@ -22,14 +22,18 @@ django-flatpickr demo - custom form
 
 
 {% block content %}
-<div class="column">
-  <h1 class="title">{{ title_text }}</h1>
-</div>
-<div class="column is-half">
-  <form action="" method="post">
-    {# {% csrf_token %} #}
-    {# csrf disabled for demo & version control purpose #}
-    {{ form.as_p }}
-  </form>
+<div class="columns mt-4">
+  <div class="column">
+    <h1 class="title">{{ title_text }}</h1>
+    {% if lead_text %}<p class="subtitle">{{ lead_text|safe }}</p>{% endif %}
+    <form action="" method="post">
+      {# {% csrf_token %} #}
+      {# csrf disabled for demo & version control purpose #}
+      {{ form.as_p }}
+    </form>
+  </div>
+  <div class="column is-half">
+    {% include 'myapp/agent-prompt.html' %}
+  </div>
 </div>
 {% endblock %}

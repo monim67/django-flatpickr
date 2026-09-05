@@ -1,0 +1,24 @@
+{% if agent_prompt %}
+<div class="card mt-4">
+  <header class="card-header">
+    <p class="card-header-title">🤖 Add to your project</p>
+  </header>
+  <div class="card-content">
+    <p class="content has-text-grey">Copy and complete following prompt to your AI coding agent to add anything from
+      this example to your project.</p>
+    <textarea id="agent-prompt" class="textarea is-small" rows="16" readonly>{{ agent_prompt }}</textarea>
+  </div>
+  <footer class="card-footer">
+    <a class="card-footer-item" onclick="copyPrompt('agent-prompt', this)">Copy prompt</a>
+  </footer>
+</div>
+<script>
+  function copyPrompt(id, btn) {
+    navigator.clipboard.writeText(document.getElementById(id).value).then(() => {
+      const original = btn.innerHTML;
+      btn.innerHTML = 'Copied!';
+      setTimeout(() => btn.innerHTML = original, 2000);
+    });
+  }
+</script>
+{% endif %}

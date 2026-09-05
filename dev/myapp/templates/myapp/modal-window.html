@@ -28,9 +28,15 @@ django-flatpickr demo - {{ title_text }}
 
 
 {% block content %}
-<div class="column">
-  <h1 class="title">{{ title_text }}</h1>
-  <button id="modal-trigger" class="button is-link">Open Modal Window</button>
+<div class="columns mt-4">
+  <div class="column">
+    <h1 class="title">{{ title_text }}</h1>
+    {% if lead_text %}<p class="subtitle">{{ lead_text|safe }}</p>{% endif %}
+    <button id="modal-trigger" class="button is-link">Open Modal Window</button>
+  </div>
+  <div class="column is-half">
+    {% include 'myapp/agent-prompt.html' %}
+  </div>
 </div>
 <div class="modal" id="event-modal">
   <div class="modal-background"></div>
