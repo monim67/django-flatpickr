@@ -25,4 +25,5 @@ urlpatterns = [
         views.DynamicFormsetView.as_view(),
         name="dynamic-formset",
     ),
+    path("modal-window.html", views.ModalFormView.as_view(), name="modal-window"),
 ]

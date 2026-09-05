@@ -96,3 +96,13 @@ class DynamicFormsetView(generic.FormView[ToDoForm]):
 
     def form_valid(self, form: BaseForm) -> HttpResponse:
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER", "/"))
+
+
+class ModalFormView(generic.edit.CreateView[Event, EventForm]):
+    model = Event
+    form_class = EventForm
+    template_name = "myapp/modal-window.html"
+    extra_context = {
+        "title_text": "Use in a Modal",
+        "submit_text": "Submit",
+    }

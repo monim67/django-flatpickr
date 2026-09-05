@@ -1,0 +1,55 @@
+{% extends 'layouts/main.html' %}
+
+{% block page_title %}
+django-flatpickr demo - {{ title_text }}
+{% endblock %}
+
+{% block extra_css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block extra_js %}
+{{ form.media.js }}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('event-modal');
+    const openModal = () => modal.classList.add('is-active');
+    const closeModal = () => modal.classList.remove('is-active');
+    document.getElementById('modal-trigger').addEventListener('click', openModal);
+    modal.querySelectorAll('.modal-background, .modal-close').forEach((el) => {
+      el.addEventListener('click', closeModal);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeModal();
+    });
+  });
+</script>
+{% endblock %}
+
+
+{% block content %}
+<div class="column">
+  <h1 class="title">{{ title_text }}</h1>
+  <button id="modal-trigger" class="button is-link">Open Modal Window</button>
+</div>
+<div class="modal" id="event-modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="box">
+      <form action="" method="post">
+        {# {% csrf_token %} #}
+        {# csrf disabled for demo & version control purpose #}
+        {{ form.as_p }}
+
+        <div class="field"></div>
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-link">{{ submit_text }}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+{% endblock %}

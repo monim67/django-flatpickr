@@ -5,6 +5,17 @@
     <meta charset="utf-8">
     <title>{% block page_title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css" />
+    <style>
+        /* bulma's navbar doesn't shrink navbar-menu, so on desktop it overflows once items no longer fit alongside the brand */
+        @media screen and (min-width: 1024px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            .navbar-menu {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
     {% block extra_css %}
     {% endblock %}
 </head>
