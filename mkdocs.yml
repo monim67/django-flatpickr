@@ -1,0 +1,19 @@
+site_name: django-flatpickr Documentation
+theme: readthedocs
+site_url: https://monim67.github.io/django-flatpickr/
+site_dir: pages
+
+markdown_extensions:
+  - admonition
+
+plugins:
+  - llmstxt-md:
+      enable_copy_button: false
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Usage: usage.md
+  - Customization: customization.md
+  - Template Customizing: template-customizing.md
+  - Troubleshooting: troubleshooting.md

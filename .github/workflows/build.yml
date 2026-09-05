@@ -38,11 +38,15 @@ jobs:
       - name: Install dependencies
         run: |
           poetry env use ${{ matrix.python-version }}
-          poetry install --no-root --only build --no-ansi --no-interaction
+          poetry install --no-root --only build,docs --no-ansi --no-interaction
           poetry run pip install -c tests/pip-constraints.txt .
 
       - name: Lint
         run: poetry run poe lint
+
+      - name: Build Docs
+        # before test, because building after test wipes out pages/demo
+        run: poetry run mkdocs build
 
       - name: Test Coverage
         run: poetry run poe test-cov

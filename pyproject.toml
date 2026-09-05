@@ -6,7 +6,7 @@ description = """\
     DateTimePickerInput with date-range-picker functionality \
     for django >= 2.0\
     """
-readme = "README.rst"
+readme = "README.md"
 requires-python = ">=3.10,<4"
 license = "MIT"
 authors = [{ name = "Abdul Monim" }]
@@ -62,12 +62,17 @@ pyright = "^1.1.350"
 django-stubs = "~6.0.9"
 coverage = { extras = ["toml"], version = "^6.5.0" }
 pylint = "^2.12.0"
-rstcheck = "^6.1.0"
 website-downloader = "^2.6.1"
 poethepoet = "^0.15.0"
 django-crispy-forms = "^1.14.0"
 crispy-bulma = "^0.8.0"
 django-filter = "^26.1"
+mdformat = "^1.0.0"
+mdformat-mkdocs = "^5.3.0"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.6.1"
+mkdocs-llmstxt-md = "^0.3.0"
 
 [tool.poetry.group.dev.dependencies]
 tox = "^4.61.1"
@@ -145,7 +150,7 @@ lint = [
     { cmd = "python -m isort --check-only src tests dev" },
     { cmd = "pyright" },
     { cmd = "pydocstyle src" },
-    { cmd = "rstcheck --report-level warning README.rst" },
+    { cmd = "mdformat --check README.md docs" },
 ]
 test-cov = [
     { cmd = "coverage run" },

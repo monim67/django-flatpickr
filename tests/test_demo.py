@@ -14,10 +14,10 @@ pytestmark = pytest.mark.django_db(serialized_rollback=True)
 
 def test_build(live_server: LiveServer, tmp_path: Path) -> None:
     pages = tmp_path if os.getenv("TOX_ENV_NAME") else Path.cwd() / "pages"
-    if pages.exists():
-        shutil.rmtree(pages)
     demo = pages / "demo"
     demo.mkdir(parents=True)
+    if demo.exists():
+        shutil.rmtree(demo)
     crawl_options = CrawlOptions(start_url=live_server.url, root=demo, max_pages=500)
     stats = crawl_site(crawl_options)
     assert stats.errors == 0

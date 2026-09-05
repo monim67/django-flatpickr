@@ -1,6 +1,6 @@
 ---
 name: update-package-requirements
-description: 'Update this project when adding or dropping Python version support, or when updating package dependencies. Use for: bumping supported Python range, adding/removing pyXYZ from build targets, updating prod/dev/build dependencies, fixing lint or test failures after a dependency change.'
+description: 'Only use to update requirements of the released package for example python version or main dependencies. Do not use to update other dependencies, use poetry instead.'
 ---
 
 # Update Package Requirements

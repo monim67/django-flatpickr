@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "Django: runserver",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "module": "poethepoet",
             "args": [
@@ -17,6 +17,17 @@
             },
             "django": true,
             "justMyCode": true
+        },
+        {
+            "name": "MKDocs: Serve",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "mkdocs",
+            "args": [
+                "serve",
+                "-a",
+                "localhost:8001"
+            ],
         },
     ]
 }
