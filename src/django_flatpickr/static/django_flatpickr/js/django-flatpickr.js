@@ -52,11 +52,19 @@
 
   document.addEventListener('DOMContentLoaded', function (event) {
     findAndProcessFlatpickrInputs(document);
-    document.addEventListener('DOMNodeInserted', function (event) {
-      setTimeout(() => {
-        if (event.target.querySelectorAll) findAndProcessFlatpickrInputs(event.target);
-      });
+    const observer = new MutationObserver((mutationsList, observer) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          const addedNodes = Array.from(mutation.addedNodes);
+          for (const node of addedNodes) {
+            if (node.querySelectorAll) {
+              findAndProcessFlatpickrInputs(node);
+            }
+          }
+        }
+      }
     });
+    observer.observe(document, { childList: true, subtree: true });
   });
 
   /**
