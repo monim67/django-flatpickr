@@ -39,7 +39,7 @@ class DjangoFlatpickrSettings(BaseSettings):
     options: FlatpickrOptions = FlatpickrOptions()
     flatpickr_cdn_url: str = "https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/"
     app_static_url: str = (
-        "https://cdn.jsdelivr.net/gh/monim67/django-flatpickr@2.0.0/src/django_flatpickr/static/django_flatpickr/"
+        "https://cdn.jsdelivr.net/gh/monim67/django-flatpickr@2f6dda61/src/django_flatpickr/static/django_flatpickr/"
     )
     debug: bool = Field(default_factory=lambda: getattr(django_settings, "DEBUG", True))
 
