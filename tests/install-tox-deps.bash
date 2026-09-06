@@ -3,7 +3,7 @@
 set -e
 
 install() {
-    poetry install --no-root --only build
+    poetry install --no-root --no-plugins --only build
     uv pip install -c tests/pip-constraints.txt -e .
 }
 
