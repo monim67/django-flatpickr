@@ -4,55 +4,61 @@ import functools
 from typing import Any
 
 from django.conf import settings as django_settings
-
-try:
-    from pydantic.v1 import Field
-    from pydantic.v1.env_settings import BaseSettings, SettingsSourceCallable
-except ModuleNotFoundError:  # pragma: no cover
-    from pydantic import Field  # type: ignore
-    from pydantic.env_settings import (  # type: ignore
-        BaseSettings,
-        SettingsSourceCallable,
-    )
+from pydantic import Field
+from pydantic.fields import FieldInfo
+from pydantic_settings import (
+    BaseSettings,
+    PydanticBaseSettingsSource,
+    SettingsConfigDict,
+)
 
 from .schemas import FlatpickrOptions, ThemeEnum
 
 
-def _django_settings_source(settings: BaseSettings) -> dict[str, Any]:
-    return getattr(django_settings, "DJANGO_FLATPICKR", {})
+class _DjangoSettingsSource(PydanticBaseSettingsSource):
+    """Settings source reading the `DJANGO_FLATPICKR` dict from Django settings."""
+
+    def get_field_value(
+        self, field: FieldInfo, field_name: str
+    ) -> tuple[Any, str, bool]:
+        return self().get(field_name), field_name, False
+
+    def __call__(self) -> dict[str, Any]:
+        return getattr(django_settings, "DJANGO_FLATPICKR", {})
 
 
-class DjangoFlatpickrSettings(BaseSettings):  # pyright: ignore
+class DjangoFlatpickrSettings(BaseSettings):
     """Package settings to customize inputs."""
 
-    theme_name: ThemeEnum | None
-    theme_url: str | None
-    template_name: str | None
+    model_config = SettingsConfigDict(env_prefix="DJANGO_FLATPICKR_")
+
+    theme_name: ThemeEnum | None = None
+    theme_url: str | None = None
+    template_name: str | None = None
     attrs: dict[str, str] = {}
-    options = FlatpickrOptions()
-    flatpickr_cdn_url = "https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/"
-    app_static_url = "https://cdn.jsdelivr.net/gh/monim67/django-flatpickr@2.0.0/src/django_flatpickr/static/django_flatpickr/"
+    options: FlatpickrOptions = FlatpickrOptions()
+    flatpickr_cdn_url: str = "https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/"
+    app_static_url: str = (
+        "https://cdn.jsdelivr.net/gh/monim67/django-flatpickr@2.0.0/src/django_flatpickr/static/django_flatpickr/"
+    )
     debug: bool = Field(default_factory=lambda: getattr(django_settings, "DEBUG", True))
 
-    class Config:
-        """Customize pydantic config."""
-
-        env_prefix = "DJANGO_FLATPICKR_"
-
-        @classmethod
-        def customise_sources(
-            cls,
-            init_settings: SettingsSourceCallable,
-            env_settings: SettingsSourceCallable,
-            file_secret_settings: SettingsSourceCallable,
-        ) -> tuple[SettingsSourceCallable, ...]:
-            """Add django settings as config source."""
-            return (
-                init_settings,
-                env_settings,
-                file_secret_settings,
-                _django_settings_source,
-            )
+    @classmethod
+    def settings_customise_sources(
+        cls,
+        settings_cls: type[BaseSettings],
+        init_settings: PydanticBaseSettingsSource,
+        env_settings: PydanticBaseSettingsSource,
+        dotenv_settings: PydanticBaseSettingsSource,
+        file_secret_settings: PydanticBaseSettingsSource,
+    ) -> tuple[PydanticBaseSettingsSource, ...]:
+        """Add django settings as config source."""
+        return (
+            init_settings,
+            env_settings,
+            file_secret_settings,
+            _DjangoSettingsSource(settings_cls),
+        )
 
 
 @functools.lru_cache(maxsize=1)

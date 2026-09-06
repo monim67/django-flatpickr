@@ -3,10 +3,7 @@
 from enum import Enum
 from typing import Any, NoReturn, TypeAlias
 
-try:
-    from pydantic.v1 import BaseModel, Extra, Field, validator
-except ModuleNotFoundError:  # pragma: no cover
-    from pydantic import BaseModel, Extra, Field, validator  # type: ignore
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 InputAttrs: TypeAlias = dict[str, Any]
 
@@ -23,70 +20,78 @@ class ThemeEnum(str, Enum):
     confetti = "confetti"
 
 
-class FlatpickrOptions(BaseModel, extra=Extra.allow):  # pyright: ignore
+class FlatpickrOptions(BaseModel):
     """Flatpickr options to create flatpickr instance."""
 
-    allowInput: bool | None
-    allowInvalidPreload: bool | None
-    altFormat: str | None
+    model_config = ConfigDict(extra="allow")
+
+    allowInput: bool | None = None
+    allowInvalidPreload: bool | None = None
+    altFormat: str | None = None
     altInput: bool = True
-    altInputClass: str | None
-    ariaDateFormat: str | None
-    clickOpens: bool | None
-    dateFormat: str | None
-    defaultDate: str | None
-    defaultHour: int | None = Field(ge=0, le=23)
-    defaultMinute: int | None = Field(ge=0, le=59)
-    disable: list[str] | None
-    disableMobile: bool | None
-    enable: list[str] | None
-    enableSeconds: bool | None
-    enableTime: bool | None
-    hourIncrement: int | None = Field(ge=1, le=12)
-    inline: bool | None
-    locale: str | None
-    maxDate: str | None
-    minDate: str | None
-    minuteIncrement: int | None = Field(ge=0, le=59)
-    mode: str | None
-    monthSelectorType: str | None
-    nextArrow: str | None
-    noCalendar: bool | None
-    position: str | None
-    prevArrow: str | None
-    shorthandCurrentMonth: bool | None
-    showMonths: int | None = Field(ge=1, le=12)
-    static: bool | None
-    time_24hr: bool | None
-    weekNumbers: bool | None
+    altInputClass: str | None = None
+    ariaDateFormat: str | None = None
+    clickOpens: bool | None = None
+    dateFormat: str | None = None
+    defaultDate: str | None = None
+    defaultHour: int | None = Field(default=None, ge=0, le=23)
+    defaultMinute: int | None = Field(default=None, ge=0, le=59)
+    disable: list[str] | None = None
+    disableMobile: bool | None = None
+    enable: list[str] | None = None
+    enableSeconds: bool | None = None
+    enableTime: bool | None = None
+    hourIncrement: int | None = Field(default=None, ge=1, le=12)
+    inline: bool | None = None
+    locale: str | None = None
+    maxDate: str | None = None
+    minDate: str | None = None
+    minuteIncrement: int | None = Field(default=None, ge=0, le=59)
+    mode: str | None = None
+    monthSelectorType: str | None = None
+    nextArrow: str | None = None
+    noCalendar: bool | None = None
+    position: str | None = None
+    prevArrow: str | None = None
+    shorthandCurrentMonth: bool | None = None
+    showMonths: int | None = Field(default=None, ge=1, le=12)
+    static: bool | None = None
+    time_24hr: bool | None = None
+    weekNumbers: bool | None = None
     wrap: bool = True
 
-    @validator("mode")
+    @field_validator("mode")
+    @classmethod
     def _disallow_mode(cls, v: str) -> NoReturn:
         raise ValueError(
             "Option mode is reserved and always set to static."
             " For range mode see how to use range picker in django-flatpickr docs"
         )
 
-    @validator("dateFormat")
+    @field_validator("dateFormat")
+    @classmethod
     def _disallow_dateFormat(cls, v: str) -> NoReturn:
         raise ValueError(
             "Option dateFormat is reserved and always set to Y-m-d."
             " Use altFormat to set date format selected by calendar"
         )
 
-    @validator("altInput")
+    @field_validator("altInput")
+    @classmethod
     def _disallow_altInput(cls, v: str) -> NoReturn:
         raise ValueError("Option altInput is reserved and always set to True.")
 
-    @validator("wrap")
+    @field_validator("wrap")
+    @classmethod
     def _disallow_wrap(cls, v: str) -> NoReturn:
         raise ValueError("Option wrap is reserved and always set to True.")
 
-    @validator("enableTime")
+    @field_validator("enableTime")
+    @classmethod
     def _disallow_enableTime(cls, v: str) -> NoReturn:
         raise ValueError("Option enableTime is reserved and set based on widget used.")
 
-    @validator("noCalendar")
+    @field_validator("noCalendar")
+    @classmethod
     def _disallow_noCalendar(cls, v: str) -> NoReturn:
         raise ValueError("Option noCalendar is reserved and set based on widget used.")

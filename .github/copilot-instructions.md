@@ -20,8 +20,8 @@ Bootstrap equivalent — don't port Bootstrap-specific concepts (jQuery, Month/Y
   the `range_from` target must render before the field linking to it).
 - `templates/django_flatpickr/input.html` — default input template; custom templates must keep the
   `django-flatpickr` wrapper class.
-- Supports pydantic v1 and v2 via a `try: from pydantic.v1 import ... except ModuleNotFoundError: from
-  pydantic import ...` shim — preserve this pattern when touching `schemas.py`/`settings.py`.
+- Uses native pydantic v2 API (`BaseModel`/`field_validator` in `schemas.py`, `pydantic_settings.BaseSettings`
+  in `settings.py`) — requires pydantic>=2, no pydantic v1 compatibility shim.
 
 ## Dev/demo app
 
