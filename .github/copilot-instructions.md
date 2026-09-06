@@ -35,14 +35,13 @@ Bootstrap equivalent — don't port Bootstrap-specific concepts (jQuery, Month/Y
 
 - `tests/` — pytest + pytest-django, run via `poetry run poe test-cov`.
 - Poetry (`pyproject.toml`) + poethepoet tasks: `poe start`, `poe lint`, `poe test-cov`.
-- `tox` runs tests across Python 3.10–3.14. Supports Django `>=2,<6`, Python `>=3.10,<4`.
+- `tox` runs tests across Python 3.10–3.14. Supports Django `>=2,<7`, Python `>=3.10,<4`.
 
 ## Docs
 
 - `docs/*.md` + `mkdocs.yml` — mkdocs site (readthedocs theme, explicit `nav`). Built output goes to
   `pages/` (gitignored, no CI build step — run `mkdocs build` or `mkdocs serve` manually to verify).
-- `README.md` is the canonical readme. `pyproject.toml`'s `poe lint` still runs `rstcheck README.rst`, a
-  stale reference from before the RST→Markdown migration.
+- `README.md`.
 
 ## Formatting
 
